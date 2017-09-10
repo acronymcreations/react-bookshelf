@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import './App.css'
 // import {Link, Route} from 'react-router-dom'
 
-class Book extends Component{
+class Shelf extends Component{
   state = {}
 
   render(){
@@ -14,7 +14,7 @@ class Book extends Component{
         <div className="bookshelf-books">
           <ol className="books-grid">
             {books.map(b =>
-              <li>
+              <li key={b.key}>
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: b.cover_url }}></div>
@@ -41,4 +41,4 @@ class Book extends Component{
   }
 }
 
-export default Book
+export default Shelf
