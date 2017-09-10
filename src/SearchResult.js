@@ -3,11 +3,11 @@ import React, {Component} from 'react'
 import './App.css'
 // import {Link, Route} from 'react-router-dom'
 
-class Shelf extends Component{
+class SearchResult extends Component{
   state = {}
 
   render(){
-    let books = this.props.list.filter(b => b.shelf === this.props.shelf)
+    let books = this.props.list
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.shelf_name}</h2>
@@ -19,7 +19,7 @@ class Shelf extends Component{
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${b.imageLinks['thumbnail']})` }}></div>
                     <div className="book-shelf-changer">
-                      <select defaultValue={b.shelf}>
+                      <select defaultValue='none'>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
@@ -45,4 +45,4 @@ class Shelf extends Component{
   }
 }
 
-export default Shelf
+export default SearchResult
