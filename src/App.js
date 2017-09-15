@@ -29,7 +29,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
 
-        <Route path="/add" component={Search}/>
+        <Route path="/search" component={Search}/>
 
         <Route exact path="/" render={() => (
           <div className="list-books">
@@ -59,7 +59,7 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <Link to="/add">Add a Book</Link>
+              <Link to={{pathname: "/search", state: {book_list: this.state.book_list}}}>Add a Book</Link>
             </div>
           </div>
         )}/>

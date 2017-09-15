@@ -7,13 +7,26 @@ import SearchResult from './SearchResult'
 class Search extends Component{
   state = {
     query: '',
-    results: []
+    results: [],
+    book_list: []
+  }
+
+  componentDidMount = function() {
+    this.setState({book_list: this.props.location.state.book_list})
   }
 
   findBook = (query) => {
     this.setState({query:query})
-    BooksAPI.search(this.state.query).then((results) => {
-      this.setState({results:results})
+    if(this.state.query.length > 1){
+      BooksAPI.search(this.state.query).then((results) => {
+        this.setState({results:results})
+      })
+    }
+  }
+
+  addBook = (book, event) => {
+    BooksAPI.update(book, event.target.value).then((b) => {
+      console.log("Book Added")
     })
   }
 
@@ -43,7 +56,12 @@ class Search extends Component{
         </div>
          {this.state.results !== undefined && (
            this.state.results.length > 0 && (
-             <SearchResult list={this.state.results} shelf_name='Results'/>
+             <SearchResult
+              list={this.state.results}
+              shelf_name='Results'
+              book_list={this.state.book_list}
+              onAddBook={this.addBook}
+            />
            )
          )}
       </div>

@@ -6,6 +6,20 @@ import './App.css'
 class SearchResult extends Component{
   state = {}
 
+  componentDidMount = () => {
+    // console.log(this.props.book_list)
+  }
+
+  checkForShelf = (b) => {
+    for(var i in this.props.book_list){
+      if(b.id === this.props.book_list[i].id){
+        console.log(b.title)
+        return this.props.book_list[i].shelf
+      }
+    }
+    return 'none'
+  }
+
   render(){
     let books = this.props.list
     return(
@@ -19,13 +33,17 @@ class SearchResult extends Component{
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${b.imageLinks['thumbnail']})` }}></div>
                     <div className="book-shelf-changer">
-                      <select defaultValue='none'>
+
+
+                    {!this.props.book_list.includes(b) && (
+                      <select defaultValue={this.checkForShelf(b)}
+                        onChange={(event) => this.props.onAddBook(b, event)}>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>
-                        <option value="none">None</option>
                       </select>
+                    )}
                     </div>
                   </div>
                   <div className="book-title">{b.title}</div>
@@ -37,7 +55,6 @@ class SearchResult extends Component{
                 </div>
               </li>
             )}
-
           </ol>
         </div>
       </div>
