@@ -12,7 +12,7 @@ class Search extends Component{
   }
 
   componentDidMount = function() {
-    this.setState({book_list: this.props.location.state.book_list})
+    this.setState({book_list: this.props.list})
   }
 
   findBook = (query) => {
@@ -23,14 +23,6 @@ class Search extends Component{
       })
     }
   }
-
-  addBook = (book, event) => {
-    BooksAPI.update(book, event.target.value).then((b) => {
-      console.log("Book Added")
-    })
-  }
-
-
 
   render(){
     return(
@@ -60,7 +52,7 @@ class Search extends Component{
               list={this.state.results}
               shelf_name='Results'
               book_list={this.state.book_list}
-              onAddBook={this.addBook}
+              onAddBook={this.props.addBook}
             />
            )
          )}

@@ -29,7 +29,19 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
 
-        <Route path="/search" component={Search}/>
+        <Route path="/search" render={({history}) => (
+          <Search
+            addBook={(book, event) => {
+              BooksAPI.update(book, event.target.value).then((b) => {
+                BooksAPI.getAll().then((b) => {
+                  this.setState({book_list:b})
+                  history.push('/')
+                })
+              })
+            }}
+            list={this.state.book_list}
+          />
+        )}/>
 
         <Route exact path="/" render={() => (
           <div className="list-books">

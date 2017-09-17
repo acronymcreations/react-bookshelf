@@ -13,7 +13,6 @@ class SearchResult extends Component{
   checkForShelf = (b) => {
     for(var i in this.props.book_list){
       if(b.id === this.props.book_list[i].id){
-        console.log(b.title)
         return this.props.book_list[i].shelf
       }
     }
@@ -31,7 +30,9 @@ class SearchResult extends Component{
               <li key={b.id}>
                 <div className="book">
                   <div className="book-top">
+                  {b.imageLinks !== undefined && (
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${b.imageLinks['thumbnail']})` }}></div>
+                  )}
                     <div className="book-shelf-changer">
 
 
